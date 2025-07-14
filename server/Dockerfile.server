@@ -4,8 +4,7 @@ WORKDIR /app
 # copy file page.json ไปไว้ใน /app
 COPY package*.json ./
 
-RUN npm install
-RUN npm install -g nodemon
+RUN npm install -g nodemon & npm install
 
 # . แรก client .สอง /app
 # ฝั่งซ้าย เครื่องเรา ขวา docker
@@ -14,4 +13,4 @@ COPY . .
 # ปกติ react run port 5000 เราก็ส่งออกให้ คนอื่นเข้ามาที่  5000
 EXPOSE 5000
 
-CMD ["npm", "run", "dev"]
+CMD ["nodemon", "index.js"]

@@ -14,6 +14,8 @@ services:
       # postgres password
       # บอก location host @db: ชื่อที่เก็บ database ไว้ที่ port 5432
       # app_db ชื่อ database
+    command: nodemon --legacy-watch index.js
+    restart: always
     environment:
       - DATABASE_URL=postgresql://postgres:postgres@db:5432/app_db
       - HOST=db
@@ -24,7 +26,7 @@ services:
       - SERVER_PORT=5000
     depends_on:
       - db
-  
+
   client:
     build:
       context: ./client
