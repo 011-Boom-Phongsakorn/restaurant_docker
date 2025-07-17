@@ -8,7 +8,7 @@ const Restaurants = ({ restaurants }) => {
                 {
                     restaurants && restaurants.map((restaurant) => {
                         return (
-                            <Card key={restaurant.id} id={restaurant.id} title={restaurant.title} type={restaurant.type} img={restaurant.img} />
+                            <Card key={restaurant.id} id={restaurant.id} name={restaurant.name} type={restaurant.type} imageUrl={restaurant.imageUrl} />
                         )
                     })
                 }
