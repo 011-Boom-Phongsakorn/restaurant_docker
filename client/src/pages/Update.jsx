@@ -12,14 +12,14 @@ const Update = () => {
    
 
     const [restaurant, setRestaurant] = useState({
-        title: '',
+        name: '',
         type: '',
-        img: ''
+        imageUrl: ''
     });
 
      //  2. Get Restaurant by ID
      useEffect(() => {
-        fetch(`http://localhost:5000/restaurants/${id}`)
+        fetch(`http://localhost:5000/api/v1/restaurant/${id}`)
             .then((res) => {
                 //  convert text to json format
                 return res.json();
@@ -38,23 +38,27 @@ const Update = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target
+        console.log(name, value)
         setRestaurant({ ...restaurant, [name]: value }) // {...restaurant clone ของเดิม
     }
 
     const handleSubmit = async () => {
         try {
             // async await
-            const response = await fetch(`http://localhost:5000/restaurants/${id}`, {
+            const response = await fetch(`http://localhost:5000/api/v1/restaurant/${id}`, {
                 method: "PUT",
-                body: JSON.stringify(restaurant)
+                body: JSON.stringify(restaurant),
+                headers: {
+                    "Content-Type": "application/json"
+                }
             })
 
             if (response.ok) {
                 alert("Restaurant Updated successfully!")
                 setRestaurant({
-                    title: '',
+                    name: '',
                     type: '',
-                    img: ''
+                    imageUrl: ''
                 })
             }
         } catch (e) {
@@ -71,7 +75,7 @@ const Update = () => {
                     </div>
                     <div className='space-x-2'>
                         <Drop />
-                        <input value={restaurant.title} onChange={handleChange} className='border outline-none rounded-2xl placeholder:text-cyan-500/50 border-cyan-500/50 pl-3 shadow-lg shadow-cyan-500/50' type="text" name='title' placeholder='title' />
+                        <input value={restaurant.name} onChange={handleChange} className='border outline-none rounded-2xl placeholder:text-cyan-500/50 border-cyan-500/50 pl-3 shadow-lg shadow-cyan-500/50' type="text" name='name' placeholder='name' />
                     </div>
                     <div className='space-x-2'>
                         <Drop />
@@ -79,7 +83,7 @@ const Update = () => {
                     </div>
                     <div className='space-x-2'>
                         <Drop />
-                        <input value={restaurant.img} onChange={handleChange} className='border outline-none rounded-2xl pl-3 placeholder:text-yellow-500/50 border-yellow-500/50 shadow-lg shadow-yellow-500/50' type="text" name='img' placeholder='img' />
+                        <input value={restaurant.imageUrl} onChange={handleChange} className='border outline-none rounded-2xl pl-3 placeholder:text-yellow-500/50 border-yellow-500/50 shadow-lg shadow-yellow-500/50' type="text" name='imageUrl' placeholder='imageUrl' />
                     </div>
                     <div className='space-x-2'>
                         <button type='submit' className='bg-linear-to-r rounded-[2px] shadow-lg shadow-red-500/50 from-red-500 to-pink-500 w-[100px] cursor-pointer'>Cancel</button>
@@ -87,9 +91,9 @@ const Update = () => {
                     </div>
                     <div>
                         {
-                            restaurant.img && (
+                            restaurant.imageUrl && (
                                 <div>
-                                    <img className='w-full h-[300px] object-cover' src={restaurant.img} alt="" />
+                                    <img className='w-full h-[300px] object-cover' src={restaurant.imageUrl} alt="" />
                                 </div>
                             )
                         }

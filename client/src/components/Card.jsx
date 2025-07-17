@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-const Card = ({ id, title, type, img }) => {
+const Card = ({ id, name, type, imageUrl }) => {
   const deleted = async (id) => {
     try {
       // async await
-      const response = await fetch(`http://localhost:5000/restaurants/${id}`, {
+      const response = await fetch(`http://localhost:5000/api/v1/restaurant/${id}`, {
         method: "DELETE",
       });
       if (response.ok) {
@@ -68,11 +68,11 @@ const Card = ({ id, title, type, img }) => {
   return (
     <div className="card bg-base-100 w-96 shadow-sm">
       <figure>
-        <img src={img} alt="Shoes" />
+        <img src={imageUrl} alt="Shoes" />
       </figure>
       <div className="card-body">
         <h2 className="card-title">
-          {title}
+          {name}
           <div className="badge badge-secondary">NEW</div>
         </h2>
         <p>{type}</p>

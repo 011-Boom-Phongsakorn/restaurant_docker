@@ -10,13 +10,14 @@ const Home = () => {
   useEffect(() => {
 
     // call api: GetAllRestaurants
-    fetch('http://localhost:5000/restaurants')
+    fetch('http://localhost:5000/api/v1/restaurant')
     .then((res) => {
       // convert to json format
       return res.json()
     })
     .then((resp) => {
       // save to state
+      console.log(resp)
       setRestaurants(resp)
       setFilteredRestaurant(resp)
     })
@@ -35,7 +36,7 @@ const Home = () => {
 
     const result = restaurants.filter((restaurant) => {
       return (
-        restaurant.title.toLocaleLowerCase().includes(keyword.toLocaleLowerCase()) ||
+        restaurant.name.toLocaleLowerCase().includes(keyword.toLocaleLowerCase()) ||
         restaurant.type.toLocaleLowerCase().includes(keyword.toLocaleLowerCase())
       )
     })
